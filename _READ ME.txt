@@ -1,0 +1,3 @@
+pls install https://nodejs.org/en before start
+
+If u want to change API Key pls change in html/src/APIKEY.js

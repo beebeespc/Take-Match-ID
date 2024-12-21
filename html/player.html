@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+    <title>Beebee | Player Data</title>
+    <link rel="stylesheet" href="src/styles.css">
+</head>
+<body>
+    <center><a href="."><img src="img\Logo.png" alt="Logo" id="logo" width="412px"></a></center> 
+        <h1>Fetch Player Match</h1>
+        <table id="inputTable">
+            <thead>
+                <tr>
+                    <th>Field</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Riot ID<sup style="color:red;">*</sup></td>
+                    <td><input type="text" id="playerId" placeholder="Enter Riot ID (Player Ingame#Tagline)"></td>
+                </tr>
+                <tr>
+                    <td>Start Time (Your Local Time)</td>
+                      <td><input type="datetime-local" id="timestart"></td>
+                </tr>
+                <tr>
+                    <td>End Time (Your Local Time)</td>
+                      <td><input type="datetime-local" id="timeend"></td>
+                </tr>
+                <tr>
+                    <td>Match Type<br><b><i>Default: Tournament Lobby</i></b></td>
+                      <td><select id="matchtype">
+                        <option value="tourney">Default</option>
+                        <option value="">All</option>
+                      </select></td>
+                </tr>
+            </tbody>
+        </table>
+    <center><button id="fetchbutton" onclick="fetchMatches()">Fetch Player Data</button></center>
+
+        <h2>List of Match</h2>
+        <div id="matches"></div>
+
+        <div class="pagination">
+            <button onclick="prevPage()" id="prevButton" disabled>Previous</button>
+            <button onclick="nextPage()" id="nextButton" disabled>Next</button>
+        </div>
+
+        <div class="column">
+            <p class="header">Product by BeeBee</p>
+        </div>
+        <script src="src/timechange.js"></script>
+        <script src="src/onload.js"></script>
+        <script src="src/hehe.js"></script>
+        <script src="src/APIKEY.js"></script>
+        <script src="src/player.js"></script>
+</body>
+</html>

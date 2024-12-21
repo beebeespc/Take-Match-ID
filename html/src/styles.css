@@ -1,0 +1,285 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+table, th, td {
+    border: 1px solid #ccc;
+}
+th, td {
+    padding: 10px;
+    text-align: center;
+}
+button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #0056b3;
+}
+.map-container {
+    text-align: center;
+    margin-top: 20px;
+}
+.player-list {
+    margin-top: 20px;
+}
+.player {
+    margin: 5px 0;
+    font-size: 25px;
+}
+.match-container {
+    width: 90%;
+    margin: 20px auto;
+    background-color: #fff;
+    border: 2px solid #000;
+}
+
+.match-summary {
+    display: flex;
+    justify-content: space-between;
+    background-color: #e0e0e0;
+    padding: 10px;
+    text-align: center;
+}
+
+.team {
+    width: 30%;
+}
+
+.team.blue {
+    background-color: #9290ee;
+    color: #000;
+}
+
+.team.red {
+    background-color: #f08080;
+    color: #000;
+}
+
+.match-details {
+    width: 40%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-weight: bold;
+    font-size: 18px;
+    background-color: #fff;
+    padding: 5px 10px;
+    border: 1px solid #000;
+    border-radius: 5px;
+}
+
+.players-table {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    padding: 10px;
+}
+
+.team-section {
+    width: 45%;
+    border: 1px solid #000;
+}
+
+.team-section div p {
+    margin: 0;
+    flex: 1;
+    text-align: center;
+}
+
+.team-section div img {
+    margin-right: 10px;
+    border-radius: 50%;
+}
+
+.team-section div {
+    border-bottom: 1px solid #ddd;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+}
+
+.match-info {
+    display: flex;
+    justify-content: space-around;
+    background-color: #ddd;
+    padding: 10px;
+    font-weight: bold;
+}
+
+.player-icons img {
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    margin: 5px;
+}
+
+.player-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.team.victory h2 {
+    font-weight: bold;
+    color: #2c6f2c; 
+    font-size: 22px;
+}
+
+.team.red.victory h2 {
+    color: #2c6f2c; 
+}
+.match-info span {
+    flex: 1;
+    text-align: center;
+    margin: 0 10px;
+    font-size: 18px;
+}
+
+#inputTable input {
+    width: 80%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+#inputTable select {
+    width: 82%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+button {
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.player-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.player-info img {
+    width: 120px;
+    height: 120px;
+    margin-right: 10px;
+}
+
+.player-text {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.player-name {
+    font-size: 25px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.player-kda {
+    font-size: 20px;
+    color: gray;
+    margin: 0;
+}
+
+.team.blue h2,
+.team.red h2 {
+    font-weight: bold;
+    color: #000;
+}
+
+.team.blue h2::after {
+    content: " (Victory)";
+    display: inline;
+    color: green;
+    font-weight: bold;
+    visibility: hidden;
+}
+
+.team.red h2::after {
+    content: " (Victory)";
+    display: inline;
+    color: red;
+    font-weight: bold;
+    visibility: hidden;
+}
+
+.team.blue h2.victory::after,
+.team.red h2.victory::after {
+    visibility: visible;
+}
+.container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.column {
+    flex: 50%;
+    padding: 10px;
+}
+
+.header {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.link {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    background-color: #f1f1f1;
+    border: 1px solid #ddd;
+    text-decoration: none;
+}
+
+img #logo {
+    width: 150px;
+}
+
+.input-container {
+    margin-bottom: 20px;
+}
+label {
+    margin-right: 10px;
+}
+.match-container2 {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.match-info2 {
+    flex: 1;
+    margin-left: 10px;
+}
+.player-list2 {
+    font-size: 12px;
+    color: #555;
+}
+.pagination {
+    margin-top: 20px;
+}
+.pagination button {
+    margin-right: 5px;
+}

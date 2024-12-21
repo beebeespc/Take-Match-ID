@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch Match Info</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .map-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .player-list {
+            margin-top: 20px;
+        }
+        .player {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Fetch Match Information</h1>
+    <table id="inputTable">
+        <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Match ID</td>
+                <td><input type="text" id="matchId" placeholder="Enter Match ID"></td>
+            </tr>
+        </tbody>
+    </table>
+    <button onclick="fetchMatchData()">Fetch Match Data</button>
+
+    <h2>Match Details</h2>
+    <div id="matchDetails"></div>
+
+    <script>
+        function getRegionFromMatchId(matchId) {
+            const prefix = matchId.split('_')[0];
+            const regionMap = {
+                "americas": ["NA1", "BR1", "LA1", "LA2"],
+                "europe": ["EUN1", "EUW1", "ME1", "TR1", "RU1"],
+                "asia": ["JP1", "KR1"],
+                "sea": ["OC1", "PH2", "SG2", "TH2", "TW2", "VN2"]
+            };
+
+            for (const [region, prefixes] of Object.entries(regionMap)) {
+                if (prefixes.includes(prefix)) {
+                    return region;
+                }
+            }
+
+            throw new Error("Unknown region prefix in Match ID");
+        }
+
+        function formatTimestampToUTC(timestamp) {
+            const date = new Date(timestamp);
+            return date.toUTCString();
+        }
+
+        function formatDuration(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = seconds % 60;
+            return `${minutes}m ${remainingSeconds}s`;
+        }
+
+        async function fetchMapData(mapId) {
+            const response = await fetch("https://static.developer.riotgames.com/docs/lol/maps.json");
+            const mapData = await response.json();
+            const mapInfo = mapData.find(map => map.mapId === mapId);
+            return mapInfo ? mapInfo.mapName : "Unknown Map";
+        }
+
+        function delay(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        function Proxy(apiUrl) {
+            const proxyUrl = "http://localhost:9135/proxy";
+            return `${proxyUrl}?url=${apiUrl}`;
+        }
+
+        async function fetchPlayerNames(participants) {
+            const playerNames = [];
+            for (const puuid of participants) {
+                const apiUrl = Proxy(`https://asia.api.riotgames.com/riot/account/v1/accounts/by-puuid/${puuid}?api_key=RGAPI-a9d80a77-538e-4b0c-9c88-26f686216ffb`);
+                
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'GET',
+                        headers: {
+                            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+                            "Accept-Language": "vi,en;q=0.9,en-US;q=0.8,fr;q=0.7,fr-FR;q=0.6",
+                            "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
+                            "Origin": "https://developer.riotgames.com"
+                        }
+                    });
+                    if (response.ok) {
+                        const data = await response.json();
+                        playerNames.push(`${data.gameName}#${data.tagLine}`);
+                    } else {
+                        console.error(`Failed to fetch player ${puuid}: ${response.status} ${response.statusText}`);
+                        playerNames.push("Unknown Player");
+                    }
+                } catch (error) {
+                    console.error(`Error fetching player ${puuid}:`, error);
+                    playerNames.push("Error Fetching Player");
+                }
+                await delay(50);
+            }
+            return playerNames;
+        }
+
+        async function fetchMatchData() {
+            const matchId = document.getElementById('matchId').value;
+
+            try {
+                const region = getRegionFromMatchId(matchId);
+                const apiUrl = Proxy(`https://${region}.api.riotgames.com/lol/match/v5/matches/${matchId}?api_key=RGAPI-a9d80a77-538e-4b0c-9c88-26f686216ffb`);
+
+                const response = await fetch(apiUrl, {
+                    method: 'GET',
+                    headers: {
+                        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+                        "Accept-Language": "vi,en;q=0.9,en-US;q=0.8,fr;q=0.7,fr-FR;q=0.6",
+                        "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
+                        "Origin": "https://developer.riotgames.com"
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`API error: ${response.status}`);
+                }
+
+                const data = await response.json();
+                const matchInfo = data.info;
+                const metadata = data.metadata;
+
+                // Extract required fields
+                const gameCreation = formatTimestampToUTC(matchInfo.gameCreation);
+                const gameDuration = formatDuration(matchInfo.gameDuration);
+                const mapId = matchInfo.mapId;
+
+                // Fetch map name
+                const mapName = await fetchMapData(mapId);
+
+                // Fetch player names
+                const playerNames = await fetchPlayerNames(metadata.participants);
+
+                // Build HTML
+                const matchDetailsHTML = `
+                    <p><strong>Game Creation:</strong> ${gameCreation}</p>
+                    <p><strong>Game Duration:</strong> ${gameDuration}</p>
+                    <p><strong>Map:</strong> ${mapName}</p>
+                    <div class="player-list">
+                        <h3>Participants:</h3>
+                        ${playerNames.map(name => `<p class="player">${name}</p>`).join('')}
+                    </div>
+                    
+                `;
+
+                document.getElementById('matchDetails').innerHTML = matchDetailsHTML;
+            } catch (error) {
+                document.getElementById('matchDetails').textContent = `Error: ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>

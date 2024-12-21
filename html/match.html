@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+    <title>Beebee | Match Data</title>
+    <link rel="stylesheet" href="src/styles.css">
+</head>
+<body>
+    <center><a href="."><img src="img\Logo.png" alt="Logo" id="logo" width="412px"></a></center> 
+    <h1>Fetch Match Information</h1>
+    <table id="inputTable">
+        <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Match ID<sup style="color:red; ">*</sup></td>
+                <td><input type="text" id="matchId" placeholder="Enter Match ID"></td>
+            </tr>
+        </tbody>
+    </table>
+    <center><button id="fetchbutton" onclick="fetchMatchData()">Fetch Match Data</button></center>
+
+    <h2>Match Details</h2>
+    <h4>The ingame name above will display the name of the player when they are playing that game, not the current name. If you want to use Riot ID to track matches, go down to the section below to see</h4>
+    <div class="match-container">
+        <!-- Match Summary -->
+        <div class="match-summary">
+            <div class="team blue">
+                <h2>Team Blue</h2>
+            </div>
+            <div class="match-details">
+                <span id="blue-kills">$Bluekill</span>
+                <span id="duration">$matchtime</span>
+                <span id="red-kills">$Redkill</span>
+            </div>
+            <div class="team red">
+                <h2>Team Red</h2>
+            </div>
+        </div>
+
+        <!-- Players Data -->
+        <div class="players-table">
+            <div class="team-section" id="team-blue"></div>
+            <div class="player-icons"></div>
+            <div class="team-section" id="team-red"></div>
+        </div>
+
+        <!-- Match Info -->
+        <div class="match-info">
+            <span id="datetime">Datetime (GMT)</span>
+            <span id="map-name">MAPNAME</span>
+            <span id="patch">Patch</span>
+        </div>
+    </div>
+    <h2>Player Riot ID List (Current)</h2>
+    <h3>Note:<i>Will follow the order from blue team to red team</i></h3>
+    <div id="ridc"></div>
+
+    <div class="column">
+        <p class="header">Product by BeeBee</p>
+    </div>
+
+    <script src="src/timechange.js"></script>
+    <script src="src/onload.js"></script>
+    <script src="src/match.js"></script>
+    <script src="src/hehe.js"></script>
+    <script src="src/APIKEY.js"></script>
+</body>
+</html>

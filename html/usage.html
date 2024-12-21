@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+    <title>BeeBee | Homepage</title>
+    <link rel="stylesheet" href="src/styles.css">
+</head>
+<body>
+    <div id="logo-container">
+        <center><a href="."><img src="img\Logo.png" alt="Logo" id="logo" width="412px"></a></center> 
+    </div>
+<center><h1><b>Tool Usage Help</b></h1></center>
+<center><b>
+    This is a tool to find Match ID from Riot ID.
+    <br>Originally intended for tournaments using Tournament-V5 of the Riot Games API on the live server.
+    <br>The tool is programmed by BeeBee. If you have any problems with the code, you can find me (beebeespc) at <a href="https://discord.gg/6SNQ4c6" target="_blank"> discord Leaguepedia</a>.</b></center>
+<h2>Player Match Tracking</h2>
+<p><b>Field: Riot ID</b><br>
+    This is a required field. And note, please write down the current player's Riot ID, not the summonername or old Riot ID. And you must fill in the Riot ID#Tagline, otherwise the software will not work.
+    <br>If you don't know the Riot ID but only know the name on the display of the match HUD then you can use <a href="https://www.op.gg/" target="_blank">op.gg</a>, <a href="https://www.u.gg/" target="_blank">u.gg</a> and <a href="https://tracker.gg/lol" target="_blank">tracker.gg</a> to find them and if it gives many results try with all of them.
+</p>
+
+<p><b>Field: Start Date and End Date</b><br>
+    Time here is the time frame you want to retrieve information from, not the time of ONE match<br>
+    Both of these fields are optional, but when entering, please enter both the date and time because if you only enter one of the two, it will return an empty result.
+</p>
+
+<p><b>Field: Match Type</b><br>
+    The default for this field is Tourney (Games created with Tournament Code)<br>but if you type in a player's Riot ID and it doesn't work and you're wondering if you've entered something wrong, I've added an option called All to see all of their games.
+</p>
+
+<p><b>List of Match</b><br>
+    <img src="img\VikingEsportsbigfan\1.png" width="890px"><br>
+<b>(1)</b> This is the exported Match ID you can click on to go to the match fetch page<br>
+<b>(2)</b> This is the champion the player uses in the match.<br>
+<b>(3)</b> Is the time the Lobby was created. The top row is UTC +0 and the bottom row is your Local Time<br>
+<b>(4)</b> Is a list of players who participated in that match (Names will be based on their names at the time of playing that match, not their names at the current time)
+</p>
+
+<p><b>Previous - Next (Button)</b><br>
+    You can only access 10 matches at a time so just use it to watch more but I think if you use Starttime and Endtime properly you won't need it hehe :D 
+</p>
+
+<h2>Match Data</h2>
+<p><b>Field: Match ID</b><br>
+    This field is required and please enter the match code in the following Format {Servercode}_{MatchID}.<br><br>
+    Invalid {Servercode} includes Special Realms such as Development Realm or Tournament Realm or Tencent and Garena Clients<br>
+    Valid {Servercode} includes: <br>
+    <b>NA1</b> North America<br>
+    <b>BR1</b> Brazil<br>
+    <b>LA1</b> Latin America North<br>
+    <b>LA2</b> Latin Ameraca South<br>
+    <b>EUN1</b> Europe North East<br>
+    <b>EUW1</b> Europe West<br>
+    <b>ME1</b> Middle East<br>
+    <b>TR1</b> Turkey<br>
+    <b>RU1</b> Russia<br>
+    <b>JP1</b> Japan<br>
+    <b>KR1</b> South Korea<br>
+    <b>OC1</b> Oceania<br>
+    <b>PH2</b> Philippines<br>
+    <b>SG2</b> Singapore, Malaysia and Indonesia<br>
+    <b>TH2</b> Thailand<br>
+    <b>TW2</b> Taiwan, Hongkong, Macao<br>
+    <b>VN2</b> Vietnam<br><br>
+    {MatchID} you can get with my Player Tool or you can get in Data:{Tournament Name} of Leaguepedia or in the match history section in the image below<br>
+    <img src="img\VikingEsportsbigfan\2.png" width="890px"><br>
+</p>
+
+<p><b>Match Details</b><br>
+    <img src="img\VikingEsportsbigfan\4.png" width="890px"><br>
+    <b>(1)</b> Is the number of kills on both sides<br>
+    <b>(2)</b> Is the total time of the game<br>
+    <b>(3)</b> Is the Player's Champion Icon (if the Icon cannot be found it will be replaced by the champion name)<br>
+    <b>(4)</b> It is Ingame when that player plays that match<br>
+    <b>(5)</b> It is GMT and your local time<br>
+    <b>(6)</b> The map where the match takes place<br>
+    <b>(7)</b> The patch that the match uses (if hovered over it will show the full name of that patch as shown below)<br>
+    <img src="img\VikingEsportsbigfan\5.png" width="250px"><br>
+</p>
+
+<p><b>Player Riot ID List (Current)</b><br>
+    This is the box containing the current names of all players in that match, it will be arranged by P1 Blue Team ⮞ P5 Blue Team ⮞ P1 Red Team ⮞ P5 Red Team<br><br>
+    <img src="img\VikingEsportsbigfan\6.png" width="250px"><br>
+    When you click on a name you will be taken to the match page using the riot ID.
+</p>
+
+<h2>Why I created this?</h2>
+<p>
+    This is all for the purpose of simplifying the way to get Match IDs from tournament matches on the Live server for Leaguepedia and be able to add them into Data:{Tournament Name} as in the example below.<br>
+    <img src="img\VikingEsportsbigfan\3.png" width="899px"><br>
+
+    You can use <a href="https://leaguepedia.net/parser" target="_blank">Leaguepedia's Parser</a> to convert the Match ID into the Scoreboards code on <a href="https://lol.fandom.com/" target="_blank">lol.fandom.com</a><br>
+    Example for Leaguepedia SB<br><img src="img\VikingEsportsbigfan\7.png" width="750px"><br>
+</p>
+        <div class="column">
+            <p class="header">Product by BeeBee</p>
+        </div>
+</body>
+</html>
