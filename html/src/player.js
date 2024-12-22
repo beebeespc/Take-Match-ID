@@ -87,7 +87,7 @@ function displayMatch(matchData) {
         matchDiv.innerHTML = `
         <div class="player-info"><img src="champion/${participant.championName}.png" alt="${participant.championName}" onerror="this.onerror=null; this.style.display='none'; this.insertAdjacentHTML('afterend', '<span>${participant.championName}</span>');"></div>
         <div class="match-info2">
-            <div>Match ID: <a href="match.html?matchid=${matchData.metadata.matchId}">${matchData.metadata.matchId}</a></div>
+            <div>Match ID: <a href="match.html?matchid=${matchData.metadata.matchId}"  target="_blank">${matchData.metadata.matchId}</a></div>
             <div>KDA: ${participant.kills}/${participant.deaths}/${participant.assists}</div>
             <div>Game Creation (UTC): ${gcutc}</div>
             <div>Game Creation (Local): ${gclocal}</div>
